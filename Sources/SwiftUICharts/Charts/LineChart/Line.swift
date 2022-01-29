@@ -2,8 +2,10 @@ import SwiftUI
 
 /// A single line of data, a view in a `LineChart`
 public struct Line: View {
+    
     @EnvironmentObject var chartValue: ChartValue
     @ObservedObject var chartData: ChartData
+    @Binding var currentChartValue: Double?
 
     var style: ChartStyle
 
@@ -90,6 +92,7 @@ extension Line {
         let index = Int(round((touchLocation.x / geometryWidth) * CGFloat(chartData.points.count - 1)))
         if (index >= 0 && index < self.chartData.data.count){
             self.chartValue.currentValue = self.chartData.points[index]
+            self.currentChartValue = self.chartValue.currentValue
         }
     }
 }
